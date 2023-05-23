@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt');
 const base64 = require('base-64');
 const { Sequelize, DataTypes } = require('sequelize');
 
+const PORT = process.env.PORT || 3000;
+
 // Prepare the express app
 const app = express();
 

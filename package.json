@@ -4,12 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "watch": "nodemon app.js",
+    "start": "node index.js",
+    "test": "jest --verbose --coverage",
+    "test-watch": "jest --watchAll --verbose --coverage",
     "init:config": "sequelize init:config",
-    "db:create": "sequelize db:create",
-    "test-watch": "NODE_ENV=test jest --watchAll",
-    "test": "NODE_ENV=test jest"
+    "db:create": "sequelize db:create"
   },
   "jest": {
     "testEnvironment": "node"
