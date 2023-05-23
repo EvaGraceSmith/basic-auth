@@ -1,25 +1,25 @@
-'use strict';
+// 'use strict';
 
-const express = require('express');
-const cors = require('cors');
+// const express = require('express');
+// const cors = require('cors');
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+// const app = express();
+// app.use(cors());
+// app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
-
-
-app.get('/', (req, res, next) => {
-  res.status(200).send('proof of life');
-});
+// const PORT = process.env.PORT || 3000;
 
 
-const start = (port) => {
-  app.listen(port, () => console.log('server running on', port));
-};
+// app.get('/', (req, res, next) => {
+//   res.status(200).send('proof of life');
+// });
 
-module.exports = {
-  app,
-  start,
-};
+
+// const start = (port) => {
+//   app.listen(port, () => console.log('server running on', port));
+// };
+
+// module.exports = {
+//   app,
+//   start,
+// };

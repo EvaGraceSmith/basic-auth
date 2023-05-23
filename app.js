@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const base64 = require('base-64');
 const { Sequelize, DataTypes } = require('sequelize');
 
+//if you set up a different port, you can test to see if .env is working
 const PORT = process.env.PORT || 3000;
 
 // Prepare the express app
@@ -15,22 +16,57 @@ const app = express();
 // Process JSON input and put the data on req.body
 app.use(express.json());
 
+// setup database url
+// from class demo
+const DATABASE_URL = process.env.NODE_ENV === 'test' ? 'sqlite:memory:' : process.env.DATABASE_URL;
+
+// Connect to the database and start the server
 const sequelize = new Sequelize(process.env.DATABASE_URL);
 
 // Process FORM intput and put the data on req.body
+//allows us to accept web form data
+//not needed for this lab, but good to know
 app.use(express.urlencoded({ extended: true }));
 
-// Create a Sequelize model
-const Users = sequelize.define('User', {
+// Create a Sequelize user model
+//Below is starter code from repo
+// const Users = sequelize.define('User', {
+//class demo code:
+const userModel = sequelize.define('users', {
+  //notice there is no return statement here
+  //will need to add later, refer to previous labs
   username: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
+  //must be the word password
   password: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 });
+
+//hey, this middeware exists! I can interact with the user model
+userModel.beforeCreate((user) => {
+  console.log('our user before being added to the db', user);
+});
+
+app.post('/signup', async (req, res, next) => {
+  res.status(200).send('proof of life');
+});
+
+sequelize.sync()
+  .then(()=>{
+    console.log('db is connected');
+    //you can start the server here by writing a start function and calling the start function.
+    //or you can just start the server here by writing app.listen
+    app.listen(PORT, () => console.log('listening on port' , PORT));
+  })
+  .catch((err)=>{
+    console.error('could not start server', err);
+  });
+
 
 // Signup Route -- create a new user
 // Two ways to test this route with httpie
