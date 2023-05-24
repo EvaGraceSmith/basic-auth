@@ -2,7 +2,7 @@
   "development": {
     "username": "asenathsmith",
     "password": null,
-    "database": "basic_auth",
+    "database": "basic-auth",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
