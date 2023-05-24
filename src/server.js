@@ -1,25 +1,23 @@
-// 'use strict';
+'use strict';
 
-// const express = require('express');
-// const cors = require('cors');
+// this is where we will connect to our database
+const express = require('express');
+const authRouter = require('./auth/router');
 
-// const app = express();
-// app.use(cors());
-// app.use(express.json());
+// Prepare the express app
+const app = express();
 
-// const PORT = process.env.PORT || 3000;
+//JSON input and put the data on req.body
+app.use(express.json());
 
+//FORM input and put the data on req.body
+app.use(express.urlencoded({ extended: true }));
 
-// app.get('/', (req, res, next) => {
-//   res.status(200).send('proof of life');
-// });
+// Routes
+app.use(authRouter);
 
+//
+const start = (port) => app.listen(port, () => console.log('server up on port:', port));
 
-// const start = (port) => {
-//   app.listen(port, () => console.log('server running on', port));
-// };
-
-// module.exports = {
-//   app,
-//   start,
-// };
+// Export an object with the express app and a start method
+module.exports = { app, start };
