@@ -31,7 +31,7 @@ router.post('/signin', basicAuth, async (req, res, next) => {
 
   try {
     res.status(200).json(req.user);
-  } catch (error) { next(error); }
+  } catch (error) { next('Invalid Login. message: ', error.message); }
 
 });
 
