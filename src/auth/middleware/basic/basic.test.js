@@ -8,8 +8,8 @@
 'use strict';
 
 const supertest = require('supertest');
-const { app } = require('../src/server');
-const { sequelize } = require('../../../src/auth/models');
+const { app } = require('../../../../src/server');
+const { sequelize } = require('../../../auth/models');
 
 const request = supertest(app);
 
