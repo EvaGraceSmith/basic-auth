@@ -9,7 +9,7 @@
 
 const supertest = require('supertest');
 const { app } = require('../src/server');
-const { sequelize } = require('../src/auth/models');
+const { sequelize } = require('../../../src/auth/models');
 
 const request = supertest(app);
 

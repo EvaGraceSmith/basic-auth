@@ -18,6 +18,10 @@ afterAll(async () => {
 
 //allow for user signup
 //allow for user signin
+//will not allow user to signin with incorrect password
+//will not allow user to signin with incorrect username
+
+
 
 describe('Testing our auth routes', () => {
   test ('POST to /signup to create a new user', async () => {
@@ -36,8 +40,22 @@ describe('Testing our auth routes', () => {
     expect(response.body.username).toEqual('test');
   },
   );
+
+  test ('will not allow user to signin with incorrect password', async () => {
+    const response = await request.post('/signin').auth('test', 'wrong');
+    expect(response.status).toEqual(500);
+  },
+  );
+
+  test ('will not allow user to signin with incorrect username', async () => {
+    const response = await request.post('/signin').auth('wrong', 'test');
+    expect(response.status).toEqual(500);
+  },
+  );
+  
 },
 );
+
 
 
 
